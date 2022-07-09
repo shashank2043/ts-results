@@ -6,11 +6,12 @@ from flask import Flask,request
 import os
 from subprocess import Popen, PIPE
 import sys
+
 p = Popen([sys.executable, "-m", "playwright", "install"], stdin=PIPE, stdout=PIPE, stderr=PIPE)
 frws='https://results.eenadu.net/ts-inter-2022/ts-inter-1st-year-results-2022-general.aspx'
 srws='https://results.eenadu.net/ts-inter-2022/ts-inter-2nd-year-results-2022-general.aspx'
 sscws='https://results.eenadu.net/ts-tenth-2022/ts-10th-ssc-results-2022.aspx'
-bot1_token='5345454658:AAFMgAm4NmwpDwRWcvEiZobBjalTYRJ961Y'
+bot1_token=os.environ['TOKEN']
 bot=telebot.TeleBot(bot1_token)
 server=Flask(__name__)
 @bot.message_handler(commands=['start'])
@@ -27,6 +28,7 @@ def firstyr(message):
 def secondyr(message):
     sent_mess=bot.send_message(message.chat.id,"Send Roll No")
     bot.register_next_step_handler(sent_mess,sr)
+
 @server.route('/' + bot1_token, methods=['POST'])
 def getMessage():
     json_string = request.get_data().decode('utf-8')
@@ -34,13 +36,11 @@ def getMessage():
     bot.process_new_updates([update])
     return "!", 200
 
-
 @server.route("/")
 def webhook():
     bot.remove_webhook()
     bot.set_webhook(url='https://ts-results-bot.herokuapp.com/' + bot1_token)
-    return "The App is Running \nYou can Open Telegram now\nhttps://t.me/TsInterResults_bot", 200
-
+    return "The App is Running \nYou can Open Telegram now", 200
 
 def fr(message):
     roll_number=message.text
@@ -55,6 +55,7 @@ def fr(message):
         log.close()
         bot.send_photo(message.chat.id,res)
         res.close()
+
 def sr(message):
     roll_number=message.text
     if (roll_number.lower()=="demo"):
@@ -98,5 +99,6 @@ def ssc(x):
         page.keyboard.press("Enter")
         page.wait_for_timeout(5000)
         page.screenshot(path="{}.png".format(x),full_page=True)
+
 if __name__ == "__main__":
     server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
