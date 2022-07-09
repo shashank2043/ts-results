@@ -1,0 +1,5 @@
+frws='https://results.eenadu.net/ts-inter-2022/ts-inter-1st-year-results-2022-general.aspx'
+srws='https://results.eenadu.net/ts-inter-2022/ts-inter-2nd-year-results-2022-general.aspx'
+sscws='https://results.eenadu.net/ts-tenth-2022/ts-10th-ssc-results-2022.aspx'
+bot1='5345454658:AAFMgAm4NmwpDwRWcvEiZobBjalTYRJ961Y'
+bot2='5563132173:AAHEdzXgt04BoPRYH_k4MMEOlxhJ3epU5vo'
