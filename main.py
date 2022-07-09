@@ -39,7 +39,7 @@ def getMessage():
 def webhook():
     bot.remove_webhook()
     bot.set_webhook(url='https://ts-results-bot.herokuapp.com/' + bot1_token)
-    return "The App is Running \nYou can Open Telegram now", 200
+    return "The App is Running \nYou can Open Telegram now\nhttps://t.me/TsInterResults_bot", 200
 
 
 def fr(message):
