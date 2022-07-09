@@ -8,10 +8,11 @@ from subprocess import Popen, PIPE
 import sys
 
 p = Popen([sys.executable, "-m", "playwright", "install"], stdin=PIPE, stdout=PIPE, stderr=PIPE)
-frws=os.environ['frsw']
-srws=os.environ['srws']
-sscws=os.environ['sscws']
-bot1_token=os.environ['TOKEN']
+bot1_token=os.environ.get['TOKEN']
+frws=os.environ.get['frsw']
+srws=os.environ.get['srws']
+sscws=os.environ.get['sscws']
+
 bot=telebot.TeleBot(bot1_token)
 server=Flask(__name__)
 @bot.message_handler(commands=['start'])
