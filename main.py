@@ -8,9 +8,9 @@ from subprocess import Popen, PIPE
 import sys
 
 p = Popen([sys.executable, "-m", "playwright", "install"], stdin=PIPE, stdout=PIPE, stderr=PIPE)
-frws='https://results.eenadu.net/ts-inter-2022/ts-inter-1st-year-results-2022-general.aspx'
-srws='https://results.eenadu.net/ts-inter-2022/ts-inter-2nd-year-results-2022-general.aspx'
-sscws='https://results.eenadu.net/ts-tenth-2022/ts-10th-ssc-results-2022.aspx'
+frws=os.environ['frsw']
+srws=os.environ['srws']
+sscws=os.environ['sscws']
 bot1_token=os.environ['TOKEN']
 bot=telebot.TeleBot(bot1_token)
 server=Flask(__name__)
